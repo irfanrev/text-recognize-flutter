@@ -1,3 +1,4 @@
+import 'package:another_flutter_splash_screen/another_flutter_splash_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:text_recognize_flutter/home.dart';
 
@@ -16,7 +17,34 @@ class MyApp extends StatelessWidget {
         colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple),
         useMaterial3: true,
       ),
-      home: const HomeScreen(),
+      debugShowCheckedModeBanner: false,
+      home: const SplashScreen(),
+    );
+  }
+}
+
+class SplashScreen extends StatelessWidget {
+  const SplashScreen({super.key});
+
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      body: FlutterSplashScreen.fadeIn(
+          backgroundColor: Colors.white,
+          onInit: () {
+            debugPrint("On Init");
+          },
+          onEnd: () {
+            debugPrint("On End");
+          },
+          childWidget: SizedBox(
+            height: 180,
+            width: 180,
+            child: Image.asset("assets/img/img-txt.png"),
+          ),
+          onAnimationEnd: () => debugPrint("On Fade In End"),
+          nextScreen: const HomeScreen(),
+        ),
     );
   }
 }
